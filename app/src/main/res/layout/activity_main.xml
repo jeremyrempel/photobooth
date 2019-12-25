@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_open_in_new_black_24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_save_black_24dp"
+        app:layout_constraintLeft_toRightOf="@id/btn_new"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_undo_black_24dp"
+        app:layout_constraintLeft_toRightOf="@+id/btn_save"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_color_picker"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_square_black_24dp"
+        android:tint="@android:color/black"
+        app:layout_constraintRight_toLeftOf="@+id/btn_take_photo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_take_photo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:id="@+id/view_color_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_border"
+        android:columnCount="3"
+        android:padding="5dp"
+        android:rowCount="2"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@id/btn_color_picker"
+        app:layout_constraintRight_toRightOf="@id/btn_color_picker"
+        app:layout_constraintTop_toBottomOf="@+id/btn_color_picker"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/color_pick_black"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/color_pick_red"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/holo_red_dark" />
+
+        <ImageView
+            android:id="@+id/color_pick_green"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/holo_green_dark" />
+
+        <ImageView
+            android:id="@+id/color_pick_orange"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/holo_orange_dark" />
+
+        <ImageView
+            android:id="@+id/color_pick_blue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/holo_blue_dark" />
+
+        <ImageView
+            android:id="@+id/color_pick_purple"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="1dp"
+            android:src="@drawable/ic_square_black_24dp"
+            android:tint="@android:color/holo_purple" />
+    </GridLayout>
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/btn_take_photo" />
+
+    <View
+        android:id="@+id/view_workspace_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/lightGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider" />
+
+    <TextView
+        android:id="@+id/txt_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_instructions"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_divider" />
+
+    <ImageView
+        android:id="@+id/img_start"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        android:tint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/txt_start"
+        app:layout_constraintLeft_toRightOf="@id/txt_start"
+        app:layout_constraintTop_toTopOf="@id/txt_start" />
+
+    <com.jeremyrempel.android.photobooth.DrawingView
+        android:id="@+id/view_drawing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider" />
+
+    <ImageView
+        android:id="@+id/img_photo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_divider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
