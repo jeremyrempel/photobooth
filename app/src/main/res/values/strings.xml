@@ -2,5 +2,5 @@
     <string name="app_name">Photo Booth</string>
     <string name="start_instructions">Take a photo or start drawing to start</string>
     <string name="undo_fail">Unable to perform undo</string>
-    <string name="file_save">Saved to %s1</string>
+    <string name="file_save">Saving to %s1</string>
 </resources>

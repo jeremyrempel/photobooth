@@ -9,42 +9,44 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 class PhotoBoothPresenter(private val view: PhotoBoothView, private val storageDir: File) {
     var currentPhotoPath: File? = null
+    private val executorService = Executors.newFixedThreadPool(1)
 
     fun undo() {
         view.onUndo()
     }
 
     fun save(layers: Array<Bitmap>) {
-        // todo this should be on a bg thread
-
         // make a dir
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss")
             .format(Date())
         val saveDir = File(storageDir, timeStamp)
         saveDir.mkdirs()
 
-        // save user photo as layer 0
-        if (currentPhotoPath != null) {
-            val photoFile = File(saveDir, "0.png")
-            FileOutputStream(photoFile).use { out ->
-                val bmp = BitmapFactory.decodeFile(currentPhotoPath!!.absolutePath)
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, out)
-            }
-        }
-
-        // save subsequent layers
-        layers.forEachIndexed { idx, bmp ->
-            val file = File(saveDir, "${idx + 1}.png")
-            FileOutputStream(file).use { out ->
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, out)
-            }
-        }
-
         // notify user
         view.onSaveSucess(saveDir.toString())
+
+        executorService.execute {
+            // save user photo as layer 0
+            if (currentPhotoPath != null) {
+                val photoFile = File(saveDir, "0.png")
+                FileOutputStream(photoFile).use { out ->
+                    val bmp = BitmapFactory.decodeFile(currentPhotoPath!!.absolutePath)
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, out)
+                }
+            }
+
+            // save subsequent layers
+            layers.forEachIndexed { idx, bmp ->
+                val file = File(saveDir, "${idx + 1}.png")
+                FileOutputStream(file).use { out ->
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, out)
+                }
+            }
+        }
     }
 
     fun onNewPhoto() {
